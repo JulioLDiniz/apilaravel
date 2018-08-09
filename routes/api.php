@@ -16,22 +16,18 @@ use App\lembrete;
 
 
 Route::group(['prefix'=>'lembretes'],function (){
-        Route::get('', 'LembreteController@listAll');
-        Route::get('{id}', function ($id){
-            return 'Devolver o usuário '.$id;
-        });
+        Route::get('', 'Api\LembreteController@listAll');
+        Route::get('{id}','Api\LembreteController@listOne');
         Route::post('/', function (){
 
             return 'Criar usuário na base';
         });
-        Route::put('{id}', function ($id){
-            return 'Alterar usuário '.$id;
-        });
+        Route::put('{id}', 'Api\LembreteController@update');
         Route::delete('{id}', function ($id){
             return 'Deletar usuário '.$id;
         });
 
-        Route::post('/create','LembreteController@create');
+        Route::post('/create','Api\LembreteController@create');
 });
 
 
