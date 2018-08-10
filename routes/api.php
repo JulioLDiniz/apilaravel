@@ -1,5 +1,6 @@
 <?php
-
+header('Access-Control-Allow-Origin: *'); 
+header("Access-Control-Allow-Headers", "Origin, X-Request-Width, Content-Type, Accept"); 
 use Illuminate\Http\Request;
 use App\lembrete;
 
@@ -28,6 +29,23 @@ Route::group(['prefix'=>'lembretes'],function (){
         });
 
         Route::post('/create','Api\LembreteController@create');
+});
+
+Route::group(['prefix'=>'pacientes'],function(){
+    Route::get('/', function(){
+        $a = ["nome" => "Julio",
+        "peso"=> 90,
+        "altura"=> 1.83,
+        "gordura"=> 10,
+        "imc"=> 00.00],[
+            "nome" => "Julio",
+        "peso"=> 90,
+        "altura"=> 1.83,
+        "gordura"=> 10,
+        "imc"=> 00.00
+        ];
+        return response()->json($a);
+    });
 });
 
 
