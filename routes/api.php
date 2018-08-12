@@ -19,33 +19,10 @@ use App\lembrete;
 Route::group(['prefix'=>'lembretes'],function (){
         Route::get('', 'Api\LembreteController@listAll');
         Route::get('{id}','Api\LembreteController@listOne');
-        Route::post('/', function (){
-
-            return 'Criar usuário na base';
-        });
         Route::put('{id}', 'Api\LembreteController@update');
-        Route::delete('{id}', function ($id){
-            return 'Deletar usuário '.$id;
-        });
-
+        Route::delete('{id}', 'Api\LembreteController@delete');
         Route::post('/create','Api\LembreteController@create');
 });
 
-Route::group(['prefix'=>'pacientes'],function(){
-    Route::get('/', function(){
-        $a = ["nome" => "Julio",
-        "peso"=> 90,
-        "altura"=> 1.83,
-        "gordura"=> 10,
-        "imc"=> 00.00],[
-            "nome" => "Julio",
-        "peso"=> 90,
-        "altura"=> 1.83,
-        "gordura"=> 10,
-        "imc"=> 00.00
-        ];
-        return response()->json($a);
-    });
-});
 
 

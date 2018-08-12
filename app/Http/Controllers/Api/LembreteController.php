@@ -13,7 +13,7 @@ class LembreteController extends Controller
         $lembrete->data = request()->data;
         $lembrete->status = request()->status;
         $lembrete->save();
-        return "Inserido";
+        return "Lembrete Inserido";
     }
     public function listAll(){
         return response()->json(lembrete::all());
@@ -27,9 +27,16 @@ class LembreteController extends Controller
         $lembrete->data = request()->data;
         $lembrete->status = request()->status;
         $lembrete->save();
-        return 'Alterado';
+        return 'Lembrete Alterado';
     }
     public function delete($id){
-
+        try{
+            $lembrete = lembrete::find($id);
+            $lembrete->delete();
+            return 'Lembrete Deletado';
+        }catch(\Exception $e){
+            return 'Lembrete não encontrado ';
+        }
+        
     }
 }
