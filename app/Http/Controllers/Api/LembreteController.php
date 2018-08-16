@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+
 class LembreteController extends Controller
 {
     public function create(){
@@ -27,16 +28,18 @@ class LembreteController extends Controller
         $lembrete->data = request()->data;
         $lembrete->status = request()->status;
         $lembrete->save();
-        return 'Lembrete Alterado';
+        return response()->json(['message-success'=>'Lembrete Alterado!']);
     }
     public function delete($id){
-        try{
+        try {
             $lembrete = lembrete::find($id);
+            if(is_null($lembrete)){
+                throw new \Exception("Lembrete não existente.");
+            }
             $lembrete->delete();
-            return 'Lembrete Deletado';
-        }catch(\Exception $e){
-            return 'Lembrete não encontrado ';
-        }
-        
+            return response()->json(['message-success'=>'Lembrete Excluído!']);
+        } catch (\Exception $e) {
+            return response()->json(['message-error'=>$e->getMessage()]);
+        }   
     }
 }
