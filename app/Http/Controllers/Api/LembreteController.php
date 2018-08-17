@@ -9,32 +9,65 @@ use App\Http\Controllers\Controller;
 class LembreteController extends Controller
 {
     public function create(){
-        $lembrete = new lembrete();
-        $lembrete->descricao = request()->descricao;
-        $lembrete->data = request()->data;
-        $lembrete->status = request()->status;
-        $lembrete->save();
-        return "Lembrete Inserido";
+        try {
+            $lembrete = new lembrete();
+            $lembrete->descricao = request()->descricao;
+            $lembrete->data = request()->data;
+            $lembrete->status = request()->status;
+            if(!$lembrete->save()){
+                throw new \Exception("Erro ao criar lembrete!");
+            }
+            $lembrete->save();
+            return response()->json(['message'=>'Lembrete criado!']);
+        } catch (\Exception $e) {
+            return response()->json(['message-error'=>$e->getMessage()]);
+        }
+        
     }
     public function listAll(){
-        return response()->json(lembrete::all());
+        try {
+            if(is_null(lembrete::all())){
+                throw new \Exception("Nada a exibir");
+            }
+            return response()->json(lembrete::all());
+        } catch (\Exception $e) {
+            return response()->json(['message-error'=>$e->getMessage()]);
+        }        
     }
     public function listOne($id){
-        return lembrete::find($id);
+        try {
+            if(is_null(lembrete::find($id))){
+                throw new \Exception("Lembrete não encontrado");
+            }
+            return response()->json(lembrete::find($id));
+        } catch (\Exception $e) {
+            return response()->json(['message-error'=>$e->getMessage()]);
+        } 
     }
     public function update($id){
-        $lembrete = lembrete::find($id);
-        $lembrete->descricao = request()->descricao;
-        $lembrete->data = request()->data;
-        $lembrete->status = request()->status;
-        $lembrete->save();
-        return response()->json(['message-success'=>'Lembrete Alterado!']);
+        try {
+            $lembrete = lembrete::find($id);
+            if(is_null($lembrete)){
+                throw new \Exception("Lembrete não encontrado");
+            }
+            $lembrete->descricao = request()->descricao;
+            $lembrete->data = request()->data;
+            $lembrete->status = request()->status;
+            if(!$lembrete->save()){
+                throw new \Exception("Erro ao alterar lembrete");                
+            }
+            $lembrete->save();
+            return response()->json(['message-success'=>'Lembrete Alterado!']);
+        } catch (\Exception $e) {
+            return response()->json(['message-error'=>$e->getMessage()]);
+        }
+        
     }
     public function delete($id){
         try {
             $lembrete = lembrete::find($id);
             if(is_null($lembrete)){
-                throw new \Exception("Lembrete não existente.");
+                throw new \Exception("Lembrete não econtrado");
             }
             $lembrete->delete();
             return response()->json(['message-success'=>'Lembrete Excluído!']);
