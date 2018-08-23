@@ -24,5 +24,10 @@ Route::group(['prefix'=>'lembretes'],function (){
         Route::post('/create','Api\LembreteController@create');
 });
 
+Route::group(['prefix'=>'chat'], function(){
+	Route::post('', 'Api\ChatController@createChat');
+	Route::put('{sessionId}', 'Api\ChatController@closeChat');
+});
+
 
 
