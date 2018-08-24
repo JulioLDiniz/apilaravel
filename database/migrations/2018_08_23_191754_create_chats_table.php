@@ -17,7 +17,7 @@ class CreateChatsTable extends Migration
             $table->increments('id');
             $table->integer('session_id');
             $table->dateTime('inicio_sessao');
-            $table->dateTime('fim_sessao');
+            $table->dateTime('fim_sessao')->nullable();
             $table->timestamps();
         });
     }

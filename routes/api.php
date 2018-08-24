@@ -2,7 +2,7 @@
 header('Access-Control-Allow-Origin: *'); 
 header("Access-Control-Allow-Headers", "Origin, X-Request-Width, Content-Type, Accept"); 
 use Illuminate\Http\Request;
-use App\lembrete;
+
 
 /*
 |--------------------------------------------------------------------------
