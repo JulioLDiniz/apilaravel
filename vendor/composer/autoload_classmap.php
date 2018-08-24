@@ -6,9 +6,9 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'App\\Api\\chat' => $baseDir . '/app/Api/chat.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
+    'App\\Http\\Controllers\\Api\\ChatController' => $baseDir . '/app/Http/Controllers/Api/ChatController.php',
     'App\\Http\\Controllers\\Api\\LembreteController' => $baseDir . '/app/Http/Controllers/Api/LembreteController.php',
     'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
     'App\\Http\\Controllers\\Auth\\LoginController' => $baseDir . '/app/Http/Controllers/Auth/LoginController.php',
@@ -27,9 +27,16 @@ return array(
     'App\\Providers\\EventServiceProvider' => $baseDir . '/app/Providers/EventServiceProvider.php',
     'App\\Providers\\RouteServiceProvider' => $baseDir . '/app/Providers/RouteServiceProvider.php',
     'App\\User' => $baseDir . '/app/User.php',
+    'App\\chat' => $baseDir . '/app/chat.php',
     'App\\lembrete' => $baseDir . '/app/lembrete.php',
     'ArithmeticError' => $vendorDir . '/symfony/polyfill-php70/Resources/stubs/ArithmeticError.php',
+    'Asm89\\Stack\\Cors' => $vendorDir . '/asm89/stack-cors/src/Asm89/Stack/Cors.php',
+    'Asm89\\Stack\\CorsService' => $vendorDir . '/asm89/stack-cors/src/Asm89/Stack/CorsService.php',
     'AssertionError' => $vendorDir . '/symfony/polyfill-php70/Resources/stubs/AssertionError.php',
+    'Barryvdh\\Cors\\HandleCors' => $vendorDir . '/barryvdh/laravel-cors/src/HandleCors.php',
+    'Barryvdh\\Cors\\HandlePreflight' => $vendorDir . '/barryvdh/laravel-cors/src/HandlePreflight.php',
+    'Barryvdh\\Cors\\LumenServiceProvider' => $vendorDir . '/barryvdh/laravel-cors/src/LumenServiceProvider.php',
+    'Barryvdh\\Cors\\ServiceProvider' => $vendorDir . '/barryvdh/laravel-cors/src/ServiceProvider.php',
     'Carbon\\Carbon' => $vendorDir . '/nesbot/carbon/src/Carbon/Carbon.php',
     'Carbon\\CarbonInterval' => $vendorDir . '/nesbot/carbon/src/Carbon/CarbonInterval.php',
     'Carbon\\CarbonPeriod' => $vendorDir . '/nesbot/carbon/src/Carbon/CarbonPeriod.php',
