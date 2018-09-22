@@ -3,6 +3,7 @@ header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Headers", "Origin, X-Request-Width, Content-Type, Accept"); 
 use Illuminate\Http\Request;
 use App\lembrete;
+//use App\Http\Middleware\JwtMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,13 +16,21 @@ use App\lembrete;
 |
 */
 
+Route::post('register', 'UserController@register');
+Route::post('login', 'UserController@authenticate');
+Route::get('open', 'DataController@open');
+
+Route::group(['middleware' => ['jwt.verify']], function() {
+	Route::get('user', 'UserController@getAuthenticatedUser');
+	Route::get('closed', 'DataController@closed');
+});
 
 Route::group(['prefix'=>'lembretes'],function (){
-        Route::get('', 'Api\LembreteController@listAll');
-        Route::get('{id}','Api\LembreteController@listOne');
-        Route::put('{id}', 'Api\LembreteController@update');
-        Route::delete('{id}', 'Api\LembreteController@delete');
-        Route::post('/create','Api\LembreteController@create');
+	Route::get('', 'Api\LembreteController@listAll');
+	Route::get('{id}','Api\LembreteController@listOne');
+	Route::put('{id}', 'Api\LembreteController@update');
+	Route::delete('{id}', 'Api\LembreteController@delete');
+	Route::post('/create','Api\LembreteController@create');
 });
 
 

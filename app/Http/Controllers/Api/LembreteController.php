@@ -6,8 +6,17 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 
+
+
 class LembreteController extends Controller
 {
+    public function __construct()
+ 
+   {
+ 
+       $this->middleware('jwt.verify');
+ 
+   }
     public function create(){
         try {
             $lembrete = new lembrete();
@@ -53,10 +62,10 @@ class LembreteController extends Controller
             $lembrete->descricao = request()->descricao;
             $lembrete->data = request()->data;
             $lembrete->status = request()->status;
-            if(!$lembrete->save()){
+            if(!$lembrete->update()){
                 throw new \Exception("Erro ao alterar lembrete");                
             }
-            $lembrete->save();
+            $lembrete->update();
             return response()->json(['message-success'=>'Lembrete Alterado!']);
         } catch (\Exception $e) {
             return response()->json(['message-error'=>$e->getMessage()]);
