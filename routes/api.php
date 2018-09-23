@@ -2,12 +2,7 @@
 header('Access-Control-Allow-Origin: *'); 
 header("Access-Control-Allow-Headers", "Origin, X-Request-Width, Content-Type, Accept"); 
 use Illuminate\Http\Request;
-<<<<<<< HEAD
 use App\lembrete;
-//use App\Http\Middleware\JwtMiddleware;
-=======
-
->>>>>>> aeb8564b74093153bd79558457a5675c54e68376
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +24,7 @@ Route::group(['middleware' => ['jwt.verify']], function() {
 	Route::get('closed', 'DataController@closed');
 });
 
-Route::group(['prefix'=>'lembretes'],function (){
+Route::group(['middleware' => 'jwt.verify', 'prefix'=>'lembretes'],function (){
 	Route::get('', 'Api\LembreteController@listAll');
 	Route::get('{id}','Api\LembreteController@listOne');
 	Route::put('{id}', 'Api\LembreteController@update');
@@ -37,10 +32,7 @@ Route::group(['prefix'=>'lembretes'],function (){
 	Route::post('/create','Api\LembreteController@create');
 });
 
-Route::group(['prefix'=>'chat'], function(){
-	Route::post('', 'Api\ChatController@createChat');
-	Route::put('{sessionId}', 'Api\ChatController@closeChat');
-});
+
 
 
 
